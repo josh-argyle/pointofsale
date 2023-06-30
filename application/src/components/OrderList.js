@@ -1,56 +1,9 @@
 import OrderLine from "./OrderLine";
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import OrderListHeadings from "./OrderListHeadings";
 import OrderListSubtotal from "./OrderListSubtotal";
-import axios from "axios";
 
-function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
-
-    const [isOrderListEmpty, setIsOrderListEmpty] = useState(false);
-
-    useEffect(() => {
-        if (orderLines.size > 0) {
-            setIsOrderListEmpty(false);
-        } else {
-            setIsOrderListEmpty(true);
-        }
-    }, [orderLines])
-
-    const uploadOrderData = async () => {
-        console.log("upload order data");
-        try {
-            const orders = [];
-            orderLines.forEach(l => {
-                const order = {
-                    itemQuantity: l.itemQuantity,
-                    itemName: l.itemName,
-                    itemPrice: l.itemPrice,
-                };
-                orders.push(order);
-            });
-
-            const response = await axios.post('/uploadOrderData', { orders });
-            console.log("Res status ");
-
-            const statusCode = response.status;
-            console.log("Res status " + statusCode);
-
-            if (response.status === 200) {
-                console.log("Response status 200");
-                // Request was successful
-                const empty = [];
-                updateItemsHandler(empty);
-            } else {
-                // Request was not successful
-                console.log('Request failed:', response);
-            }
-        } catch (error) {
-            console.error("Error posting to endpoint: ", error);
-        }
-    };
-
-
-
+function OrderList({ orderLines, updateItemsHandler }) {
     const handleDeleteOrderLine = (itemName) => {
         const updatedOrderLines = orderLines.map((orderLine) => {
             if (orderLine.itemName === itemName) {
@@ -80,11 +33,10 @@ function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
     return (
         // <div>
         <div className={"OrderList"}>
-            <OrderListHeadings isOrderListEmpty={isOrderListEmpty}/>
+            <OrderListHeadings />
             <div className={"OrderList-lines-container"}>
                 {orderLines.map((orderLine) => (
                     <OrderLine
-                        key={orderLine.id}
                         itemName={orderLine.itemName}
                         itemQuantity={orderLine.itemQuantity}
                         itemPrice={orderLine.itemPrice}
@@ -93,7 +45,7 @@ function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
                 ))}
             </div>
 
-            <OrderListSubtotal ordersTotal={getSubtotal()} handleButtonClick={uploadOrderData}/>
+            <OrderListSubtotal ordersTotal={getSubtotal()} />
         </div>
     );
 }
