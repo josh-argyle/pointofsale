@@ -16,10 +16,10 @@ function OrderButtons({handleOrder}) {
         { id: 6, foodName: 'Vege burger', foodPrice: 5},
     ]);
 
-    const handleOrderClick = (inputName, inputPrice) => {
+    const handleOrderClick = (id, inputName, inputPrice) => {
         console.log("handle order click")
 
-        handleOrder(inputName, inputPrice)
+        handleOrder(id, inputName, inputPrice)
     }
 
     return (
@@ -33,24 +33,27 @@ function OrderButtons({handleOrder}) {
                 <div className="OrderButtons-buttons-container" id="fried">
                     {friedFoods.map((friedFood) => (
                         <OrderButton
+                            key = {friedFood.id}
                             buttonText={friedFood.foodName}
-                            onAddItem={() => handleOrderClick(friedFood.foodName, friedFood.foodPrice)}
+                            onAddItem={() => handleOrderClick(friedFood.id, friedFood.foodName, friedFood.foodPrice)}
                         />
                     ))}
                 </div>
                 <div className="OrderButtons-buttons-container" id="chinese">
                     {chineseFoods.map((chineseFood) => (
                         <OrderButton
+                            key = {chineseFood.id}
                             buttonText={chineseFood.foodName}
-                            onAddItem={() => handleOrderClick(chineseFood.foodName, chineseFood.foodPrice)}
+                            onAddItem={() => handleOrderClick(chineseFood.id, chineseFood.foodName, chineseFood.foodPrice)}
                         />
                     ))}
                 </div>
                 <div className="OrderButtons-buttons-container" id="burgers">
                     {burgers.map((burger) => (
                         <OrderButton
+                            key = {burger.id}
                             buttonText={burger.foodName}
-                            onAddItem={() => handleOrderClick(burger.foodName, burger.foodPrice)}
+                            onAddItem={() => handleOrderClick(burger.id, burger.foodName, burger.foodPrice)}
                         />
                     ))}
                 </div>

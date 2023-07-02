@@ -2,8 +2,68 @@ import OrderLine from "./OrderLine";
 import { useState } from "react";
 import OrderListHeadings from "./OrderListHeadings";
 import OrderListSubtotal from "./OrderListSubtotal";
+import axios from "axios";
 
-function OrderList({ orderLines, updateItemsHandler }) {
+function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
+
+
+
+    // const uploadOrderData = async () => {
+    //     console.log("upload order data");
+    //     try {
+    //         const orders = [];
+    //         orderLines.forEach(l => {
+    //             const order = {
+    //                 quantity: l.itemQuantity,
+    //                 name: l.itemName,
+    //                 price: l.itemPrice,
+    //             }
+    //             orders.push(order);
+    //         })
+    //         const response = await axios.post('/uploadOrderData', {orders});
+    //         const empty = [];
+    //         // if (response === true) updateItemsHandler(empty);
+    //
+    //     } catch (error) {
+    //         console.error("Error posting to endpoint: ", error)
+    //     }
+    // };
+
+    const uploadOrderData = async () => {
+        console.log("upload order data");
+        try {
+            const orders = [];
+            orderLines.forEach(l => {
+                const order = {
+                    itemQuantity: l.itemQuantity,
+                    itemName: l.itemName,
+                    itemPrice: l.itemPrice,
+                };
+                orders.push(order);
+            });
+
+            const response = await axios.post('/uploadOrderData', { orders });
+            console.log("Res status ");
+
+            const statusCode = response.status;
+            console.log("Res status " + statusCode);
+
+            if (response.status === 200) {
+                console.log("Response status 200");
+                // Request was successful
+                const empty = [];
+                updateItemsHandler(empty);
+            } else {
+                // Request was not successful
+                console.log('Request failed:', response);
+            }
+        } catch (error) {
+            console.error("Error posting to endpoint: ", error);
+        }
+    };
+
+
+
     const handleDeleteOrderLine = (itemName) => {
         const updatedOrderLines = orderLines.map((orderLine) => {
             if (orderLine.itemName === itemName) {
@@ -37,6 +97,7 @@ function OrderList({ orderLines, updateItemsHandler }) {
             <div className={"OrderList-lines-container"}>
                 {orderLines.map((orderLine) => (
                     <OrderLine
+                        key={orderLine.id}
                         itemName={orderLine.itemName}
                         itemQuantity={orderLine.itemQuantity}
                         itemPrice={orderLine.itemPrice}
@@ -45,7 +106,7 @@ function OrderList({ orderLines, updateItemsHandler }) {
                 ))}
             </div>
 
-            <OrderListSubtotal ordersTotal={getSubtotal()} />
+            <OrderListSubtotal ordersTotal={getSubtotal()} handleButtonClick={uploadOrderData}/>
         </div>
     );
 }
