@@ -1,33 +1,20 @@
 import OrderLine from "./OrderLine";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import OrderListHeadings from "./OrderListHeadings";
 import OrderListSubtotal from "./OrderListSubtotal";
 import axios from "axios";
 
 function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
 
+    const [isOrderListEmpty, setIsOrderListEmpty] = useState(false);
 
-
-    // const uploadOrderData = async () => {
-    //     console.log("upload order data");
-    //     try {
-    //         const orders = [];
-    //         orderLines.forEach(l => {
-    //             const order = {
-    //                 quantity: l.itemQuantity,
-    //                 name: l.itemName,
-    //                 price: l.itemPrice,
-    //             }
-    //             orders.push(order);
-    //         })
-    //         const response = await axios.post('/uploadOrderData', {orders});
-    //         const empty = [];
-    //         // if (response === true) updateItemsHandler(empty);
-    //
-    //     } catch (error) {
-    //         console.error("Error posting to endpoint: ", error)
-    //     }
-    // };
+    useEffect(() => {
+        if (orderLines.size > 0) {
+            setIsOrderListEmpty(false);
+        } else {
+            setIsOrderListEmpty(true);
+        }
+    }, [orderLines])
 
     const uploadOrderData = async () => {
         console.log("upload order data");
@@ -93,7 +80,7 @@ function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
     return (
         // <div>
         <div className={"OrderList"}>
-            <OrderListHeadings />
+            <OrderListHeadings isOrderListEmpty={isOrderListEmpty}/>
             <div className={"OrderList-lines-container"}>
                 {orderLines.map((orderLine) => (
                     <OrderLine

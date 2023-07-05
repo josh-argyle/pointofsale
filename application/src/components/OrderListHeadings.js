@@ -1,7 +1,7 @@
 import ReactModal from 'react-modal';
 import {useState} from "react";
 import PastOrdersModal from "./PastOrdersModal";
-function OrderListHeadings() {
+function OrderListHeadings({isOrderListEmpty}) {
 
     const [modalActive, setModalActive] = useState(false);
 
@@ -17,7 +17,7 @@ function OrderListHeadings() {
             <div className={"OrderList-heading-container-heading"}>
                 <h1>Order</h1>
                 <button className={"OrderList-heading-container-button"} onClick={openModal}>Past Orders</button>
-                <PastOrdersModal isOpen={modalActive} onRequestClose={closeModal} />
+                <PastOrdersModal isOpen={modalActive} onRequestClose={closeModal} isOrderListEmpty={isOrderListEmpty} />
             </div>
             <div className={"OrderList-heading-subheading-container"}>
                 <label className={"OrderList-heading-subheading-container-quantity"}>Q#</label>
