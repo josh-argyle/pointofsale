@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Get Airtable API token
-const airtable_api_token = "patGxbMeyLxOW4xLb.795d7d6c0088c7b51409e21422d2a4804190d8cab725ea201cf2f85fc3b01f34";
+const airtable_api_token = process.env.AIRTABLE_API_KEY;
 // Airtable.
 const Airtable = require('airtable');
 const path = require("path");
@@ -20,7 +20,7 @@ Airtable.configure({
     endpointUrl: 'https://api.airtable.com'
 });
 // Get the airtable base from env variable.
-const base = Airtable.base("appDjfb0oRHnmeSw6");
+const base = Airtable.base(process.env.AIRTABLE_BASE_ID);
 
 
 async function getOrderHistory() {
