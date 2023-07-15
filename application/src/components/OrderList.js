@@ -3,10 +3,12 @@ import {useEffect, useState} from "react";
 import OrderListHeadings from "./OrderListHeadings";
 import OrderListSubtotal from "./OrderListSubtotal";
 import axios from "axios";
+import PastOrderDetailsModal from "./PastOrderDetailsModal";
 
-function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
+function OrderList({ orderLines, updateItemsHandler, passModalLineClick}) {
 
     const [isOrderListEmpty, setIsOrderListEmpty] = useState(false);
+
 
     useEffect(() => {
         if (orderLines.size > 0) {
@@ -49,7 +51,13 @@ function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
         }
     };
 
+    // const handleModalLineClick = () => {
+    //     passModalLineClick();
+    // }
 
+    const handleModalLineClick = () => {
+        passModalLineClick();
+    }
 
     const handleDeleteOrderLine = (itemName) => {
         const updatedOrderLines = orderLines.map((orderLine) => {
@@ -80,7 +88,8 @@ function OrderList({ orderLines, updateItemsHandler, handleButtonClick}) {
     return (
         // <div>
         <div className={"OrderList"}>
-            <OrderListHeadings isOrderListEmpty={isOrderListEmpty}/>
+            <OrderListHeadings isOrderListEmpty={isOrderListEmpty} modalOrderLineClick={handleModalLineClick()}/>
+            {/*<OrderListHeadings isOrderListEmpty={isOrderListEmpty} modalOrderLineClick={handleModalLineClick()}/>*/}
             <div className={"OrderList-lines-container"}>
                 {orderLines.map((orderLine) => (
                     <OrderLine

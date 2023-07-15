@@ -1,7 +1,10 @@
-function ModalHeading() {
+function ModalHeading({ headingString }) {
 
     return (
-        <label className={"modal-heading-container"}>Order History</label>
+        <div className={"modal-heading-container"}>
+            <label>{headingString}</label>
+
+        </div>
     )
 }
 

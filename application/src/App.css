@@ -327,7 +327,7 @@ footer, header, hgroup, menu, nav, section {
   font-size: larger;
   text-decoration-line: underline;
   text-align: center;
-  margin-bottom: 1vh;
+  margin-bottom: 2vh;
 }
 
 .modal-orders-container {
@@ -351,4 +351,46 @@ footer, header, hgroup, menu, nav, section {
   transform: scale(1.1);
   box-shadow: 0px 0px 15px 18px white;
   background-color: white;
+}
+
+.modal-past-orders-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 17fr 1fr;
+  align-items: start;
+  justify-items: center;
+  gap: 6px;
+}
+
+.past-order-modal-container {
+
+  position: absolute;
+  height: 500px;
+  width: 440px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.modal-past-orders-container-items-list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.past-order-line-container {
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  /*display: flex;*/
+  /*justify-content: space-between;*/
+}
+.past-order-line-element {
+
+}
+
+.past-order-line-total {
+  justify-self: center;
+  align-self: end;
 }

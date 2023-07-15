@@ -45,6 +45,10 @@ function App() {
 
     };
 
+    const handleModalLineClick = () => {
+
+    }
+
     return (
         <div className="App">
             <header className="App-header">
@@ -53,7 +57,7 @@ function App() {
 
             <div className="App-body">
                 <div className="OrderList-container">
-                    <OrderList orderLines={orderLines} updateItemsHandler={updateItemsHandler} />
+                    <OrderList orderLines={orderLines} updateItemsHandler={updateItemsHandler} passModalLineClick={handleModalLineClick} />
                 </div>
                 <div className="OrderButtons-container">
                     <OrderButtons handleOrder={handleOrderButtonClick}/>
