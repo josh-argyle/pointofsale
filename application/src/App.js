@@ -7,12 +7,12 @@ import {useState} from "react";
 function App() {
 
     const [orderLines, setOrderLines] = useState([
-        { id: 123, itemName: 'Item 1', itemQuantity: 3, itemPrice: 4 },
-        { id: 122, itemName: 'Item 2', itemQuantity: 1, itemPrice: 4 },
+        { itemName: 'Item 1', itemQuantity: 3, itemPrice: 4 },
+        { itemName: 'Item 2', itemQuantity: 1, itemPrice: 4 },
     ]);
 
-    const addItemHandler = (id, itemName, itemPrice) => {
-        const newItem = {id:id, itemName: itemName, itemQuantity: 1, itemPrice: itemPrice };
+    const addItemHandler = (itemName, itemPrice) => {
+        const newItem = { itemName: itemName, itemQuantity: 1, itemPrice: itemPrice };
         const existingItem = orderLines.find((item) => item.itemName === newItem.itemName);
 
         if (existingItem) {
@@ -33,9 +33,9 @@ function App() {
         console.log(orderLines)
     };
 
-    const handleOrderButtonClick = (id, inputName, inputPrice) => {
-        console.log("handle order button click " + id + " " + inputName + "   " + inputPrice)
-        addItemHandler(id, inputName, inputPrice)
+    const handleOrderButtonClick = (inputName, inputPrice) => {
+        console.log("handle order button click " + inputName + "   " + inputPrice)
+        addItemHandler(inputName, inputPrice)
 
     };
 
@@ -55,14 +55,14 @@ function App() {
 
             </header>
 
-            <div className="App-body">
+            <body className="App-body">
                 <div className="OrderList-container">
                     <OrderList orderLines={orderLines} updateItemsHandler={updateItemsHandler} passModalLineClick={handleModalLineClick} />
                 </div>
                 <div className="OrderButtons-container">
                     <OrderButtons handleOrder={handleOrderButtonClick}/>
                 </div>
-            </div>
+            </body>
 
             <footer className="App-footer">
 

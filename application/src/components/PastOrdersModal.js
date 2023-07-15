@@ -10,7 +10,6 @@ function PastOrdersModal ({isOpen, onRequestClose, isOrderListEmpty}) {
 
     /**
      *
-     *  ADDING MODAL ETC so we can select the order line and revisit the order
      *
      */
     const [orderHistory, setOrderHistory] = useState([]);
