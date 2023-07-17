@@ -44,12 +44,12 @@ function PastOrdersModal ({isOpen, onRequestClose}) {
             console.log("Fetching order history data");
             axios.get("/getOrderHistory")
                 .then((response) => {
-                    console.log("Data retrieved successfully")
+                    console.log("Data retrieved successfully");
                     console.log(response.data);
                     setOrderHistory(response.data);
                 })
                 .catch((error) => {
-                    console.error("Error fetching data:", error);
+                    console.error("Error fetching data: ", error);
                 });
         }
     }, [isOpen]);

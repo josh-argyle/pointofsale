@@ -1,20 +1,63 @@
 import OrderButton from "./OrderButton";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 function OrderButtons({handleOrder}) {
 
     const [friedFoods, setFriedFoods] = useState([
-        { id: 1, foodName: 'Chips', foodPrice: 3},
-        { id: 2, foodName: 'Fish', foodPrice: 5},
+        // { id: 1, foodName: 'Chips', foodPrice: 3},
+        // { id: 2, foodName: 'Fish', foodPrice: 5},
     ]);
     const [chineseFoods, setChineseFoods] = useState([
-        { id: 3, foodName: 'Chicken fried rice', foodPrice: 15},
-        { id: 4, foodName: 'Egg fried rice', foodPrice: 13},
+        // { id: 3, foodName: 'Chicken fried rice', foodPrice: 15},
+        // { id: 4, foodName: 'Egg fried rice', foodPrice: 13},
     ]);
-    const [burgers, setBurgers] = useState([
-        { id: 5, foodName: 'Cheeseburger', foodPrice: 7},
-        { id: 6, foodName: 'Vege burger', foodPrice: 5},
+    const [burgers, setBurgerFoods] = useState([
+        // { id: 5, foodName: 'Cheeseburger', foodPrice: 7},
+        // { id: 6, foodName: 'Vege burger', foodPrice: 5},
     ]);
+
+    useEffect(() => {
+        console.log("Fetching fried food data.")
+        axios.get("/getFriedFoods")
+            .then((response) => {
+                console.log("Fried foods retrieved successfully");
+                console.log(response.data);
+                setFriedFoods(response.data);
+            })
+            .catch((error) => {
+                console.log("Error fetching fried foods: ", error)
+            });
+    }, []);
+
+    useEffect(() => {
+        console.log("Fetching chinese food data.")
+        axios.get("/getChineseFoods")
+            .then((response) => {
+                console.log("Chinese foods retrieved successfully");
+                console.log(response.data);
+                setChineseFoods(response.data);
+            })
+            .catch((error) => {
+                console.log("Error fetching chinese foods: ", error)
+            });
+    }, []);
+
+    useEffect(() => {
+        console.log("Fetching burger food data.")
+        axios.get("/getBurgerFoods")
+            .then((response) => {
+                console.log("Burger foods retrieved successfully");
+                console.log(response.data);
+                setBurgerFoods(response.data);
+            })
+            .catch((error) => {
+                console.log("Error fetching burger foods: ", error)
+            });
+    }, []);
+
+
+
 
     const handleOrderClick = (inputName, inputPrice) => {
         console.log("handle order click")

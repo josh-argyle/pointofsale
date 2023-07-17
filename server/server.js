@@ -94,6 +94,39 @@ async function upload_order_data(data) {
     });
 }
 
+async function getMenuItems(menuSection) {
+    const tableName = menuSection;
+    console.log(`Getting ${menuSection} foods`);
+    return new Promise((resolve, reject) => {
+        const records = [];
+
+        base(tableName).select({
+            view: "Grid view",
+            fields: ['id', 'foodName', 'foodPrice'],
+        }).eachPage(
+            function page(pageRecords, fetchNextPage) {
+                pageRecords.forEach(function (record) {
+                    const recordObj = {
+                        id: record.get("id"),
+                        foodName: record.get('foodName'),
+                        foodPrice: record.get('foodPrice'),
+                    }
+                    records.push(recordObj);
+                });
+                fetchNextPage();
+            },
+            function done(err) {
+                if (err) {
+                    console.error(err);
+                    reject(err);
+                } else {
+                    resolve(records);
+                }
+            }
+        );
+    });
+}
+
 app.post("/uploadOrderData", (req, res) => {
     console.log("Uploading order")
     const data = req.body;
@@ -120,6 +153,23 @@ app.get("/getOrderHistory", async (req, res) => {
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
 });
+
+app.get("/getFriedFoods", async (req, res) => {
+    const menuItems = await getMenuItems("fried");
+    console.log(menuItems);
+    res.json(menuItems);
+});
+
+app.get("/getChineseFoods", async (req, res) => {
+    const menuItems = await getMenuItems("chinese");
+    res.json(menuItems);
+});
+
+app.get("/getBurgerFoods", async (req, res) => {
+    const menuItems = await getMenuItems("burgers");
+    res.json(menuItems);
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
