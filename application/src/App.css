@@ -91,7 +91,7 @@ footer, header, hgroup, menu, nav, section {
 
 .OrderButton:hover {
   /*background-color: ;*/
-  box-shadow: 0px 0px 2px 2px white;
+  box-shadow: 0 0 2px 2px white;
 }
 
 .OrderButtons-container {
@@ -220,7 +220,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 .OrderList-heading-container-button:hover {
-  box-shadow: 0px 0px 5px 2px black;
+  box-shadow: 0 0 5px 2px black;
   transform: scale(1.02);
 }
 
@@ -303,7 +303,7 @@ footer, header, hgroup, menu, nav, section {
 
 .OrderList-subtotal-submitButton:hover {
   /*background-color: ;*/
-  box-shadow: 0px 0px 5px 3px black;
+  box-shadow: 0 0 5px 3px black;
   transform: scale(1.02);
 }
 
@@ -320,7 +320,7 @@ footer, header, hgroup, menu, nav, section {
   background-color: var(--wheatAlt);
   border: 3px solid lightgrey;
   border-radius: 40px;
-  box-shadow: 0px 0px 15px 18px white;
+  box-shadow: 0 0 15px 18px white;
 }
 
 .modal-heading-container {
@@ -330,9 +330,15 @@ footer, header, hgroup, menu, nav, section {
   margin-bottom: 2vh;
 }
 
+.modal-orders-inner-container {
+  height: 100%;
+
+}
+
 .modal-orders-container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
+  align-items: start;
 }
 
 .modal-order-line-container {
@@ -349,14 +355,14 @@ footer, header, hgroup, menu, nav, section {
   border-radius: 40px;
   border: 1px solid white;
   transform: scale(1.1);
-  box-shadow: 0px 0px 15px 18px white;
+  box-shadow: 0 0 15px 18px white;
   background-color: white;
 }
 
 .modal-past-orders-container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 17fr 1fr;
+  grid-template-rows: 1fr 2fr 8fr 2fr 2fr;
   align-items: start;
   justify-items: center;
   gap: 6px;
@@ -377,6 +383,7 @@ footer, header, hgroup, menu, nav, section {
   display: flex;
   flex-direction: column;
   width: 90%;
+  height: 100%;
 }
 
 .past-order-line-container {
@@ -391,6 +398,25 @@ footer, header, hgroup, menu, nav, section {
 }
 
 .past-order-line-total {
-  justify-self: center;
-  align-self: end;
+  /*justify-self: center;*/
+  /*align-self: start;*/
+  height: 50px;
+}
+
+.exit-button-image {
+
+  height: 50px;
+  width: 50px;
+}
+
+.exit-button-button {
+  background: none;
+  border: none;
+  transition-duration: .2s;
+  transform: scale(0.9);
+}
+
+.exit-button-button:hover {
+  filter: drop-shadow(0px 0px 4px darkred);
+  transform: scale(1);
 }

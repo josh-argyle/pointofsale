@@ -4,9 +4,10 @@ import ModalHeading from "./ModalHeading";
 import axios from "axios";
 import ModalOrderLine from "./ModalOrderLine";
 import PastOrderDetailsModal from "./PastOrderDetailsModal";
+import ExitButton from "./ExitButton";
 
 // function PastOrdersModal ({isOpen, onRequestClose, isOrderListEmpty, handleClickModalLine}) {
-function PastOrdersModal ({isOpen, onRequestClose, isOrderListEmpty}) {
+function PastOrdersModal ({isOpen, onRequestClose}) {
 
     /**
      *
@@ -59,17 +60,21 @@ function PastOrdersModal ({isOpen, onRequestClose, isOrderListEmpty}) {
             <div className={"modal-container"}>
                 <ModalHeading headingString={"Order History"} />
                 <PastOrderDetailsModal orderData={pastOrderHistory} isOpen={isOrderDetailModalOpen} onRequestClose={closeOrderDetailsModal}/>
-                <div className={"modal-orders-container"}>
-                    {[...orderHistory].reverse().map((order, index) => (
+                <div className={"modal-orders-inner-container"}>
+                    <div className={"modal-orders-container"}>
+                        {[...orderHistory].reverse().map((order, index) => (
 
-                        <ModalOrderLine
+                            <ModalOrderLine
 
-                            key={`${order.orderDate}_${index}`}
-                            orderData={order}
-                            clickModalOrderLine={() => handleClickModalOrderLine(order)}
-                        />
-                    ))}
+                                key={`${order.orderDate}_${index}`}
+                                orderData={order}
+                                clickModalOrderLine={() => handleClickModalOrderLine(order)}
+                            />
+                        ))}
+                    </div>
                 </div>
+                {/*<button className={"exit-button-button"} onClick={onRequestClose}><img src={"./circle-xmark-regular.svg"} alt={"Exit button"} className={"exit-button-image"} /></button>*/}
+                <ExitButton onRequestClose={onRequestClose}/>
             </div>
         </Modal>
     )

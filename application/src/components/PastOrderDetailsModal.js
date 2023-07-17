@@ -1,6 +1,7 @@
 import Modal from "react-modal";
 import ModalHeading from "./ModalHeading";
 import PastOrderLine from "./PastOrderLine";
+import ExitButton from "./ExitButton";
 
 function PastOrderDetailsModal ({ orderData, isOpen, onRequestClose }) {
 
@@ -12,7 +13,7 @@ function PastOrderDetailsModal ({ orderData, isOpen, onRequestClose }) {
         const listParts = removedPunctuation.split(", ");
 
         const items = [];
-        listParts.forEach((item, index) => {
+        listParts.forEach((item) => {
             const currentItem = {
                 quantity: item[0],
                 itemName: item.slice(1, item.length - 2),
@@ -49,6 +50,7 @@ function PastOrderDetailsModal ({ orderData, isOpen, onRequestClose }) {
                             {/*<label>{orderData.orderNotes}</label>*/}
                         </div>
                         <label className={"past-order-line-total"}>Total: ${orderData.orderTotal}</label>
+                        <ExitButton onRequestClose={onRequestClose} />
                     </div>
                 </div>
             </Modal>
